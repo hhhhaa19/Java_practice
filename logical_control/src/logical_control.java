@@ -1,4 +1,4 @@
-import javax.swing.plaf.synth.SynthOptionPaneUI;
+
 import java.util.Scanner;
 
 public class logical_control {
@@ -29,6 +29,7 @@ public class logical_control {
                 count++;
             if (i / 10 == 9)
                 count++;
+            i++;
         }
         //思考：这两种if的区别
         // System.out.println(count);
@@ -36,7 +37,6 @@ public class logical_control {
 
     public static void main3(String[] args) {
         //判定素数
-        boolean a = true;
         Scanner sc = new Scanner(System.in);
         System.out.println("please input the number you want to test if it is a prime number");
         int number = sc.nextInt();
@@ -106,7 +106,7 @@ public class logical_control {
         }
     }
 
-    public static void main(String[] args) {
+    public static void main7(String[] args) {
         //编写代码模拟三次密码输入的场景。 最多能输入三次密码，密码正确，提示“登录成功”,密码错误，
         // 可以重新输 入，最多输入三次。三次均错，则提示退出程序
         int count = 3;
@@ -134,5 +134,32 @@ public class logical_control {
             }
             System.out.println();
         }
+    }
+
+    public static void main(String[] args) {
+        //. 写一个函数返回参数二进制中 1 的个数
+        //提供两种写的方式
+        //一、一位一位来
+/*        Scanner sc=new Scanner(System.in);
+        int num=sc.nextInt();
+        int count=0;
+        while(num!=0){
+            if((num&1)==1){
+                count++;
+            }
+            num >>=1;
+        }
+        System.out.println(count);
+        sc.close();*/
+        //二、n&(n-1)
+        Scanner sc=new Scanner(System.in);
+        int num=sc.nextInt();
+        int count=0;
+        while(num!=0){
+            num &=num-1;
+            count++;
+        }
+        System.out.println(count);
+        sc.close();
     }
 }
