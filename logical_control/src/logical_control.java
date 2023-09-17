@@ -14,13 +14,23 @@ public class logical_control {
 
     public static void main2(String[] args) {
         //编写程序数一下 1到 100 的所有整数中出现多少个数字9
-        int i = 1;
+     /*   int i = 1;
         int count = 0;
         while (i <= 100) {
             if (i % 10 == 9 || i / 10 == 9)
                 count++;
             i++;
+        }*/
+        //上述方式有问题：99少算了一个9因此如下
+        int i = 1;
+        int count = 0;
+        while (i <= 100) {
+            if (i % 10 == 9)
+                count++;
+            if (i / 10 == 9)
+                count++;
         }
+        //思考：这两种if的区别
         // System.out.println(count);
     }
 
@@ -77,14 +87,14 @@ public class logical_control {
 
     public static void main6(String[] args) {
         //打印 X 图形
-        Scanner sc=new Scanner(System.in);
-        while(sc.hasNext()){
-            int num=sc.nextInt();
-            int i=0;
-            while(i<num){
-                int j=0;
-                while (j<num){
-                    if(j==i||j==num-i-1)
+        Scanner sc = new Scanner(System.in);
+        while (sc.hasNext()) {
+            int num = sc.nextInt();
+            int i = 0;
+            while (i < num) {
+                int j = 0;
+                while (j < num) {
+                    if (j == i || j == num - i - 1)
                         System.out.print("*");
                     else
                         System.out.print(" ");
@@ -103,11 +113,11 @@ public class logical_control {
     }
 
     public static void main(String[] args) {
-        Scanner sc =new Scanner(System.in);
-        int num= sc.nextInt();
+        Scanner sc = new Scanner(System.in);
+        int num = sc.nextInt();
         for (int i = 1; i <= num; i++) {
             for (int j = 1; j <= i; j++) {
-                System.out.printf("%d*%d\t",j,i);
+                System.out.printf("%d*%d\t", j, i);
             }
             System.out.println();
         }
