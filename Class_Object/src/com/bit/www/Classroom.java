@@ -9,6 +9,7 @@ package com.bit.www;
  */
 public class Classroom {
     public int capacity;
+    public int name;
     static private int code=23;
     public Classroom(int capacity) {
         this.capacity = capacity;
