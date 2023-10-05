@@ -5,9 +5,15 @@
  * Date: 2023-09-27
  * Time: 20:32
  */
+
 public class Student {
     String name;
     int age;
+
+    public Student(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
 
     @Override
     public String toString() {
@@ -15,10 +21,5 @@ public class Student {
                 "name='" + name + '\'' +
                 ", age=" + age +
                 '}';
-    }
-
-    public Student(String name, int age) {
-        this.name = name;
-        this.age = age;
     }
 }

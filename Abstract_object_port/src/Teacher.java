@@ -5,7 +5,7 @@
  * Date: 2023-09-27
  * Time: 20:43
  */
-public class Teacher implements Comparable<Teacher>{
+public class Teacher implements Comparable<Teacher> {
     String name;
     int age;
 
@@ -22,7 +22,6 @@ public class Teacher implements Comparable<Teacher>{
         this.age = age;
     }
 
-    @Override
     public int compareTo(Teacher o) {
         return this.age-o.age;
     }

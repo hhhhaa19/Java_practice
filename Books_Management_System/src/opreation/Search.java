@@ -1,0 +1,18 @@
+package opreation;
+
+import book.Booklist;
+
+/**
+ * Created with IntelliJ IDEA.
+ * Description:
+ * User: 王金涛
+ * Date: 2023-10-05
+ * Time: 19:05
+ */
+public class Search implements Iopreation {
+    @Override
+    public void operation(Booklist booklist) {
+
+        System.out.println("查找图书");
+    }
+}
