@@ -12,6 +12,9 @@ import book.Booklist;
 public class Display implements Iopreation{
     @Override
     public void operation(Booklist booklist) {
-        System.out.println("显示图书");
+
+        for (int i = 0; i < booklist.getUsed(); i++) {
+            System.out.println(booklist.getBooks(i));
+        }
     }
 }

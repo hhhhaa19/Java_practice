@@ -63,12 +63,12 @@ public class Book {
 
     @Override
     public String toString() {
-        return "book.Book{" +
+        return "Book{" +
                 "name='" + name + '\'' +
                 ", author='" + author + '\'' +
                 ", price=" + price +
                 ", type='" + type + '\'' +
-                ", isborrowed=" + isborrowed +
-                '}';
+                ", "+(isborrowed==true? "已被借出":"未被借出")+
+        '}';
     }
 }

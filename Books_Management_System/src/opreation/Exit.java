@@ -12,6 +12,7 @@ import book.Booklist;
 public class Exit implements Iopreation{
     @Override
     public void operation(Booklist booklist) {
-        System.out.println("退出图书");
+        System.out.println("退出图书管理系统");
+        System.exit(1);
     }
 }
