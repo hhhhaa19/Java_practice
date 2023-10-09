@@ -7,7 +7,6 @@
  */
 public class Main {
     public static void main(String[] args) {
-   StringToInt st =new StringToInt();
-        System.out.println(st.StrToInt("##"));
+LengthLastWord.LengthLastWord();
     }
 }
