@@ -7,7 +7,7 @@
  */
 public class Main {
     public static void main(String[] args) {
-        Count c =new Count();
-        System.out.println(c.countSegments("                "));
+   StringToInt st =new StringToInt();
+        System.out.println(st.StrToInt("##"));
     }
 }
