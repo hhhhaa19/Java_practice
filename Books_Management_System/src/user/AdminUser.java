@@ -13,6 +13,24 @@ import java.util.Scanner;
  * Time: 19:18
  */
 public class AdminUser extends User {
+    private static String name ="Benjamin";
+    private static String password ="123456";
+
+    public static String getName() {
+        return name;
+    }
+
+    public static void setName(String name) {
+        AdminUser.name = name;
+    }
+
+    public static String getPassword() {
+        return password;
+    }
+
+    public static void setPassword(String password) {
+        AdminUser.password = password;
+    }
 
     public AdminUser() {
         super.iopreations = new Iopreation[]{
