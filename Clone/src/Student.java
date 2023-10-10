@@ -9,6 +9,14 @@ public class Student implements Cloneable{
     public String name;
     public int age;
 
+    public Money money;
+
+    public Student(String name, int age, Money money) {
+        this.name = name;
+        this.age = age;
+        this.money = money;
+    }
+
     public Student(String name, int age) {
         this.name = name;
         this.age = age;
