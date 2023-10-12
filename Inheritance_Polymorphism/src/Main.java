@@ -9,11 +9,15 @@ import java.util.Scanner;
 class Base {
 
     private int x;
-    private int y;
 
     public Base(int x, int y) {
         this.x = x;
         this.y = y;
+    }
+
+    private int y;
+
+    public Base() {
     }
 
     public int getX() {
@@ -30,9 +34,17 @@ class Sub extends Base {
 
     private int z;
 
+    public Sub() {
+
+    }
+
     public Sub(int x, int y, int z) {
-        super(x,y);
-        this.z=z;
+        super(x, y);
+        this.z = z;
+    }
+
+    public Sub(int z) {
+        this.z = z;
     }
 
     public int getZ() {
@@ -51,7 +63,7 @@ public class Main {
             int x = scanner.nextInt();
             int y = scanner.nextInt();
             int z = scanner.nextInt();
-            Sub sub = new Sub(x, y, z);
+            Sub sub = new Sub();
             System.out.println(sub.calculate());
         }
     }
