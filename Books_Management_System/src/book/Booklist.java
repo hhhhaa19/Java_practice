@@ -23,7 +23,7 @@ public class Booklist {
     public Booklist(){
         this.capacity=10;
         this.books=new Book[this.capacity];
-        this.books[0]=new Book("三国演义","罗贯中",23,"小说");
+        this.books[0]=new Book("三国演义","罗贯中",23,"小说","1");
         this.used=1;
     }
 
@@ -41,5 +41,9 @@ public class Booklist {
 
     public void setUsed(int used) {
         this.used = used;
+    }
+
+    public Book[] getBooks() {
+        return books;
     }
 }

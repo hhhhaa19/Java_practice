@@ -1,5 +1,8 @@
 package book;
 
+import javax.rmi.CORBA.Stub;
+import java.util.Comparator;
+
 /**
  * Created with IntelliJ IDEA.
  * Description:
@@ -8,11 +11,30 @@ package book;
  * Time: 15:03
  */
 public class Book {
+    //根据序列号排序
     private String name;
     private String author;
     private int price;
+
+    public String getIndex() {
+        return index;
+    }
+
+    public void setIndex(String index) {
+        this.index = index;
+    }
+
     private String type;
     private boolean isborrowed;
+    private String index;
+
+    public Book(String name, String author, int price, String type, String index) {
+        this.name = name;
+        this.author = author;
+        this.price = price;
+        this.type = type;
+        this.index = index;
+    }
 
     public Book(String name, String author, int price, String type) {
         this.name = name;
@@ -67,8 +89,8 @@ public class Book {
                 "name='" + name + '\'' +
                 ", author='" + author + '\'' +
                 ", price=" + price +
-                ", type='" + type + '\'' +
-                ", "+(isborrowed==true? "已被借出":"未被借出")+
-        '}';
+                ", type='" + type + '\'' +" 序列号 "+index+'\''+
+                ", " + (isborrowed == true ? "已被借出" : "未被借出") +
+                '}';
     }
 }

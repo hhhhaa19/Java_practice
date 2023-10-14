@@ -23,12 +23,14 @@ public class Add implements Iopreation {
         String author = sc.nextLine();
         System.out.println("请输入书的类型");
         String type = sc.nextLine();
+        System.out.println("请输入书的索引号");
+        String index = sc.nextLine();
         System.out.println("请输入书的价格");
         int price = sc.nextInt();
         if (booklist.getUsed() == booklist.getCapacity()) {
             System.out.println("已满无法加书");
         } else {
-            Book book = new Book(name, author, price, type);
+            Book book = new Book(name, author, price, type,index);
             booklist.setBooks(booklist.getUsed(),book);
             booklist.setUsed(booklist.getUsed()+1);//由于下标与数目的不完全统一，这里used表示为下一本书的下标
             System.out.println("新增成功");

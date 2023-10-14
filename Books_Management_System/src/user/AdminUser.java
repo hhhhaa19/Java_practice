@@ -39,6 +39,7 @@ public class AdminUser extends User {
                 new Add(),
                 new Del(),
                 new Display(),
+                new Sort(),
         };
     }
 
@@ -54,6 +55,7 @@ public class AdminUser extends User {
         System.out.println("****2.新增图书****");
         System.out.println("****3.删除图书****");
         System.out.println("****4.显示图书****");
+        System.out.println("****5.排序图书****");
         System.out.println("****0.退出系统****");
         System.out.println("****************");
         System.out.println("***请输入你的操作**");
