@@ -1,5 +1,6 @@
 import java.util.Arrays;
 
+
 import Exception.OutofboundException;
 
 /**
@@ -9,15 +10,15 @@ import Exception.OutofboundException;
  * Date: 2023-10-14
  * Time: 14:34
  */
-public class Myarraylist implements IMyarraylist {
+public class Myarraylist<T>  {
 
-    public int[] elem;
+    public Object[] elem;
     public int usedSize;//0
     //默认容量
     private static final int DEFAULT_SIZE = 10;
 
     public Myarraylist() {
-        this.elem = new int[DEFAULT_SIZE];
+        this.elem = new Object[DEFAULT_SIZE];
     }
 
     /**
@@ -26,24 +27,23 @@ public class Myarraylist implements IMyarraylist {
      */
     public void display() {
         for (int i = 0; i < this.usedSize; i++) {
-            System.out.print(this.elem[i] + " ");
+            System.out.println(this.elem[i] + " ");
         }
-        System.out.println("");
     }
 
-    private boolean isfull(int[] elem) {
+    private boolean isfull(T[] elem) {
         return this.usedSize == elem.length;
     }
 
-    private void checkcapacity(int[] elem) {
+    private void checkcapacity(T[] elem) {
         if (this.isfull(elem)) {
             this.elem = Arrays.copyOf(elem, usedSize * 2);
         }
     }
 
     // 新增元素,默认在数组最后新增
-    public void add(int data) {
-        checkcapacity(this.elem);
+    public void add(T data) {
+        checkcapacity((T[])elem);
         this.elem[usedSize] = data;
         usedSize++;
     }
@@ -64,14 +64,14 @@ public class Myarraylist implements IMyarraylist {
     }
 
     // 在 pos 位置新增元素
-    public void add(int pos, int data) {
+    public void add(int pos, T data) {
         try {
             checkPosInAdd(pos);
         } catch (OutofboundException e) {
             e.printStackTrace();
             System.exit(-1);
         }
-        checkcapacity(this.elem);
+        checkcapacity((T[])elem);
         //在pos后的数往后移
         for (int i = usedSize - 1; i >= pos; i--) {
             elem[i + 1] = elem[i];
@@ -81,14 +81,15 @@ public class Myarraylist implements IMyarraylist {
     }
 
     // 判定是否包含某个元素
-    public boolean contains(int toFind) {
+    public boolean contains(T toFind) {
+
         return  !(indexOf(toFind) == -1);
     }
 
     // 查找某个元素对应的位置
-    public int indexOf(int toFind) {
+    public int indexOf(T toFind) {
         for (int i = 0; i < usedSize; i++) {
-            if (toFind == this.elem[i]) {
+            if (toFind.equals(elem[i])) {
                 return i;
             }
         }
@@ -96,14 +97,14 @@ public class Myarraylist implements IMyarraylist {
     }
 
     // 获取 pos 位置的元素
-    public int get(int pos) {
+    public T get(int pos) {
         try {
             checkPosInget(pos);
         } catch (OutofboundException e) {
             e.printStackTrace();
             System.exit(-1);
         }
-        return this.elem[pos];
+        return (T)elem[pos];
     }
 
     private boolean isEmpty() {
@@ -111,7 +112,7 @@ public class Myarraylist implements IMyarraylist {
     }
 
     // 给 pos 位置的元素设为【更新为】 value
-    public void set(int pos, int value) {
+    public void set(int pos, T value) {
         try {
             checkPosInget(pos);
         } catch (OutofboundException e) {
@@ -126,7 +127,7 @@ public class Myarraylist implements IMyarraylist {
      *
      * @param key
      */
-    public void remove(int key) {
+    public void remove(T key) {
         int pos = indexOf(key);
         for (int i = pos; i < usedSize - 1; i++) {
             elem[i] = elem[i + 1];
