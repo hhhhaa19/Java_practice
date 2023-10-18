@@ -89,7 +89,7 @@ public class Myarraylist<T>  {
     // 查找某个元素对应的位置
     public int indexOf(T toFind) {
         for (int i = 0; i < usedSize; i++) {
-            if (toFind.equals(elem[i])) {
+            if ( toFind.equals(elem[i])) {
                 return i;
             }
         }
