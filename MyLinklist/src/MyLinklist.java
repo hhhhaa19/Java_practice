@@ -1,11 +1,11 @@
 /**
  * Created with IntelliJ IDEA.
- * Description:
+ * Description:单向不带头，不循环
  * User: 王金涛
  * Date: 2023-10-18
  * Time: 19:15
  */
-public class MySingleLinklist implements ImySingleLinkedlist {
+public class MyLinklist implements ImyLinkedlist {
     static class Node {
         int data;
         Node next;

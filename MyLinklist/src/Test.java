@@ -7,7 +7,7 @@
  */
 public class Test {
     public static void main(String[] args) {
-        MySingleLinklist ml = new MySingleLinklist();
+        MyLinklist ml = new MyLinklist();
         ml.addFirst(21);
         ml.addFirst(21);
         ml.addFirst(21);

@@ -5,7 +5,7 @@
  * Date: 2023-10-18
  * Time: 19:14
  */
-public interface ImySingleLinkedlist {
+public interface ImyLinkedlist {
 
         //头插法
         public void addFirst(int data);
