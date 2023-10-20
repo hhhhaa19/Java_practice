@@ -8,7 +8,7 @@
 public class Reverse {
     public ListNode reverseList(ListNode head) {
         ListNode pre = head;
-        if (pre == null)
+        if(pre==null)
             return null;
         if (pre.next != null) {
             ListNode next = head.next;
@@ -18,9 +18,9 @@ public class Reverse {
                 if (pre == head) {
                     pre.next = null;
                 }
-                pre = next;
-                next = nextcur;
-                nextcur = nextcur.next;
+                pre=next;
+                next=nextcur;
+                nextcur=nextcur.next;
             }
             next.next = pre;
             if (pre == head) {
