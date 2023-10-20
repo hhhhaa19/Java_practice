@@ -6,7 +6,7 @@
  * Time: 19:22
  */
 public class Test {
-    public static void main1(String[] args) {
+    public static void main(String[] args) {
         MyLinklist ml = new MyLinklist();
         ml.addFirst(21);
         ml.addFirst(21);
@@ -19,7 +19,7 @@ public class Test {
 
     }
 
-    public static void main(String[] args) {
+    public static void main2(String[] args) {
         MyLinkedlist ml = new MyLinkedlist();
         ml.addFirst(21);
         ml.addLast(54);

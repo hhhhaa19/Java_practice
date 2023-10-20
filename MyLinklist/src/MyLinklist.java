@@ -136,9 +136,11 @@ public class MyLinklist implements ImyLinkedlist {
             while (cur != null) {
                 if (cur.data == key) {
                     pre.next = cur.next;
+                    cur = cur.next;
+                }else{
+                    pre=cur;
+                    cur=cur.next;
                 }
-                cur = cur.next;
-                pre = pre.next;
             }
         }
 
