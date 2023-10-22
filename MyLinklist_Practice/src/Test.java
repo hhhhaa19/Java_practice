@@ -14,7 +14,6 @@ public class Test {
         node1.next=node2;
         node2.next=node3;
         node3.next=node4;
-        System.out.println(new palindrome().chkPalindrome(node1));
-
+       ListNode head= new DivideLinkList().partition(node1,2);
     }
 }
