@@ -1,6 +1,6 @@
 /**
  * Created with IntelliJ IDEA.
- * Description:队列
+ * Description:队列,链表实现
  * User: 王金涛
  * Date: 2023-10-25
  * Time: 10:45
