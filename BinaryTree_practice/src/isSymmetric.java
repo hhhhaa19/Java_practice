@@ -38,4 +38,24 @@ public class isSymmetric {
         //好想法，利用了轴对称图形翻转后是其本身的特点，但可惜之前的invertTree是对原二叉树进行改变的
         return isSameTree(root,invertTree(root));
     }
+    public boolean isSymmetric1(TreeNode root){
+        if(root ==null){
+            return true;
+        }
+        return helpIsSymmetric1(root.left,root.right);
+    }
+    public boolean helpIsSymmetric1(TreeNode left,TreeNode right){
+        if(left==null&&right==null){
+            return true;
+        }
+        if(left==null){
+            return false;
+        }
+        if(right==null){
+            return false;
+        }
+        return left.val== right.val
+                && helpIsSymmetric1(left.right,right.left)
+                && helpIsSymmetric1(left.left,right.right);//另一种形式的判断是否相同
+    }
 }

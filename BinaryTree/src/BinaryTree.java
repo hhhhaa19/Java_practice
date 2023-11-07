@@ -1,5 +1,4 @@
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created with IntelliJ IDEA.
@@ -93,5 +92,77 @@ public class BinaryTree {
         List<Integer> rightTree = preorderTraversal(root.right);
         list.addAll(rightTree);
         return list;
+    }
+    public List<List<Integer>> levelOrder(Node root) {
+        Queue<Node> q1 =new LinkedList<>();
+        List<List<Integer>> ret =new ArrayList<>();
+        if(root ==null){
+            return ret;
+        }
+        q1.add(root);
+        while(!q1.isEmpty()){
+            List<Integer> curl = new ArrayList<>();
+            Queue<Node> next =new LinkedList<>();
+            while(!q1.isEmpty()){
+                Node cur = q1.peek();
+                curl.add(q1.poll().data);
+
+                if(cur.left!=null){
+                    next.add(cur.left);
+                }
+                if(cur.right !=null){
+                    next.add(cur.right);
+                }
+            }
+            ret.add(curl);
+            q1=next;
+        }
+        return ret;
+    }
+    boolean isCompleteTree1 (Node root){
+        Queue<Node> q1 =new LinkedList<>();
+        q1.add(root);
+        while(!q1.isEmpty()){
+            Node cur = q1.peek();
+            if(cur.left!=null){
+                q1.add(cur.left);
+            }
+            if(cur.right!=null){
+                q1.add(cur.right);
+            }
+            if(cur.left==null&&cur.right!=null){
+                return false;
+            }
+            q1.poll();
+        }
+        return true;
+    }
+    boolean isCompleteTree (Node root){
+        if(root==null){
+            return true;
+        }
+        Queue<Node> q1 =new LinkedList<>();
+        q1.add(root);
+        while(!q1.isEmpty()){
+            Node cur = q1.peek();
+            if(cur==null){
+                break;
+            }else{
+                q1.add(cur.left);
+                q1.add(cur.right);
+            }
+            q1.poll();
+        }
+        //需要判断队列当中 是否有非空的元素
+        while (!q1.isEmpty()) {
+            //一个元素 一个元素 出队来判断 是不是空
+            Node tmp = q1.peek();
+            if(tmp == null) {
+                q1.poll();
+            }else {
+                return false;
+            }
+        }
+        return true;
     }
 }
