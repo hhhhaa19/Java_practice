@@ -24,4 +24,26 @@ public class isBalance {
                 isBalanced(root.left) &&
                 isBalanced(root.right);
     }
+    int HeightDIff (TreeNode root){
+        if(root==null){
+            return 0;
+        }
+        int left =HeightDIff(root.left);
+        int right =HeightDIff(root.right);
+        if(left>=0&&right>=0&&Math.abs(left-right)<=1){
+            return Math.max(left,right)+1;
+        }else{
+            return -1;
+        }
+    }
+    public boolean isBalanced1(TreeNode root){
+        if(root==null){
+            return true;
+        }
+       if(HeightDIff(root)>0){
+           return true;
+       }else{
+           return false;
+       }
+    }
 }
