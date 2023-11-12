@@ -93,6 +93,7 @@ public class BinaryTree {
         list.addAll(rightTree);
         return list;
     }
+    //从上到下，从左到右
     public List<List<Integer>> levelOrder(Node root) {
         Queue<Node> q1 =new LinkedList<>();
         List<List<Integer>> ret =new ArrayList<>();
@@ -117,6 +118,18 @@ public class BinaryTree {
             ret.add(curl);
             q1=next;
         }
+        return ret;
+    }
+    //从下到上，从左到右
+    public List<List<Integer>> levelOrderBottom(Node root) {
+        Queue<Node> q1 =new LinkedList<>();
+        List<List<Integer>> ret =new ArrayList<>();
+        if(root ==null){
+            return ret;
+        }
+        q1.add(root);
+            List<Integer> curl = new ArrayList<>();
+
         return ret;
     }
     boolean isCompleteTree1 (Node root){
