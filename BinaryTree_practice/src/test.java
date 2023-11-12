@@ -6,7 +6,7 @@
  * Time: 20:19
  */
 public class test {
-    public static void main(String[] args) {
+    public static void main1(String[] args) {
         TreeNode node1=new TreeNode(1);
         TreeNode node2=new TreeNode(2);
         TreeNode node3=new TreeNode(2);
@@ -22,6 +22,10 @@ public class test {
         node6.left=node7;
         node6.right=node8;
         System.out.println(new isSymmetric().isSymmetric(node1));
+    }
+
+    public static void main(String[] args) {
+       new CreateBinaryTree().Create("abc##de#g##f###");
     }
 
 

@@ -24,6 +24,7 @@ public class BinaryTree {
                     '}';
         }
     }
+
     //节点个数
     int size(Node root) {
         if (root == null) {
@@ -31,59 +32,64 @@ public class BinaryTree {
         }
         return size(root.left) + size(root.right) + 1;
     }
+
     //叶子节点个数
-    int getLeafNodeCount(Node root)
-    {
-        if(root==null){
+    int getLeafNodeCount(Node root) {
+        if (root == null) {
             return 0;
         }
-        if(root.right==null&&root.left==null){
+        if (root.right == null && root.left == null) {
             return 1;
         }
-        return getLeafNodeCount(root.right)+getLeafNodeCount(root.left);
+        return getLeafNodeCount(root.right) + getLeafNodeCount(root.left);
     }
+
     //第k层节点个数
-    int getKLevelNodeCount(Node root,int k){
-        if(root==null){
+    int getKLevelNodeCount(Node root, int k) {
+        if (root == null) {
             return 0;
         }
-        if(k==1){
+        if (k == 1) {
             return 1;
         }
-        return getKLevelNodeCount(root.left,k-1)+getKLevelNodeCount(root.right,k-1);
+        return getKLevelNodeCount(root.left, k - 1) + getKLevelNodeCount(root.right, k - 1);
     }
-    private int Max (int a, int b){
-        return a>b?a:b;
+
+    private int Max(int a, int b) {
+        return a > b ? a : b;
     }
+
     //求二叉树的高
-    int getHeight(Node root){
-        if(root==null){
+    int getHeight(Node root) {
+        if (root == null) {
             return 0;
         }
-        return Max(getHeight(root.left),getHeight(root.right))+1;
+        return Max(getHeight(root.left), getHeight(root.right)) + 1;
     }
+
     //找到值为value的元素
-    Node find(Node root,int val){
-        if(root==null){
+    Node find(Node root, int val) {
+        if (root == null) {
             return null;
         }
-        if(root.data==val){
+        if (root.data == val) {
             return root;
         }
-        Node left=find(root.left,val);
-        if(left!=null){
+        Node left = find(root.left, val);
+        if (left != null) {
             return left;
         }
-        Node right=find(root.right,val);
-        if(right!=null){
+        Node right = find(root.right, val);
+        if (right != null) {
             return right;
         }
         return null;
     }
+
     //前序遍历
     public List<Integer> preorderTraversal(Node root) {
         List<Integer> list = new ArrayList<>();
-        if(root == null) {
+        if (root == null) {
             return list;
         }
         list.add(root.data);
@@ -93,74 +99,136 @@ public class BinaryTree {
         list.addAll(rightTree);
         return list;
     }
+
+    //前序非递归
+    public List<Integer> preorderTraversalIt(Node root) {
+        List<Integer> list = new ArrayList<>();
+        Stack<Node> st = new Stack<>();
+        Node cur = root;
+        while (!st.isEmpty() || cur != null) {
+            while (cur != null) {
+                st.add(cur);
+                list.add(cur.data);
+                cur = cur.left;
+            }
+            Node pre = st.pop();
+            cur = pre.right;
+        }
+        return list;
+    }
+
+    //中序非递归
+    public List<Integer> inorderTraversalIt(Node root) {
+        List<Integer> list = new ArrayList<>();
+        Stack<Node> st = new Stack<>();
+        Node cur = root;
+        while (!st.isEmpty() || cur != null) {
+            while (cur != null) {
+                st.add(cur);
+                cur = cur.left;
+            }
+            Node pre = st.pop();
+            list.add(pre.data);
+            cur = pre.right;
+        }
+        return list;
+    }
+
+    //后序非递归
+    public List<Integer> postorderTraversalIt(Node root) {
+        List<Integer> list = new ArrayList<>();
+        Stack<Node> st = new Stack<>();
+        Node cur = root;
+        Node prev = null;
+        while (!st.isEmpty() || cur != null) {
+            while (cur != null) {
+                st.add(cur);
+                cur = cur.left;
+            }
+            Node pre = st.peek();
+            list.add(pre.data);
+            if (pre.right == null || pre.right == pre) {
+                list.add(pre.data);
+                st.pop();
+                prev = pre;
+            } else {
+                cur = pre.right;
+            }
+        }
+        return list;
+    }
+
     //从上到下，从左到右
     public List<List<Integer>> levelOrder(Node root) {
-        Queue<Node> q1 =new LinkedList<>();
-        List<List<Integer>> ret =new ArrayList<>();
-        if(root ==null){
+        Queue<Node> q1 = new LinkedList<>();
+        List<List<Integer>> ret = new ArrayList<>();
+        if (root == null) {
             return ret;
         }
         q1.add(root);
-        while(!q1.isEmpty()){
+        while (!q1.isEmpty()) {
             List<Integer> curl = new ArrayList<>();
-            Queue<Node> next =new LinkedList<>();
-            while(!q1.isEmpty()){
+            Queue<Node> next = new LinkedList<>();
+            while (!q1.isEmpty()) {
                 Node cur = q1.peek();
                 curl.add(q1.poll().data);
 
-                if(cur.left!=null){
+                if (cur.left != null) {
                     next.add(cur.left);
                 }
-                if(cur.right !=null){
+                if (cur.right != null) {
                     next.add(cur.right);
                 }
             }
             ret.add(curl);
-            q1=next;
+            q1 = next;
         }
         return ret;
     }
+
     //从下到上，从左到右
     public List<List<Integer>> levelOrderBottom(Node root) {
-        Queue<Node> q1 =new LinkedList<>();
-        List<List<Integer>> ret =new ArrayList<>();
-        if(root ==null){
+        Queue<Node> q1 = new LinkedList<>();
+        List<List<Integer>> ret = new ArrayList<>();
+        if (root == null) {
             return ret;
         }
         q1.add(root);
-            List<Integer> curl = new ArrayList<>();
+        List<Integer> curl = new ArrayList<>();
 
         return ret;
     }
-    boolean isCompleteTree1 (Node root){
-        Queue<Node> q1 =new LinkedList<>();
+
+    boolean isCompleteTree1(Node root) {
+        Queue<Node> q1 = new LinkedList<>();
         q1.add(root);
-        while(!q1.isEmpty()){
+        while (!q1.isEmpty()) {
             Node cur = q1.peek();
-            if(cur.left!=null){
+            if (cur.left != null) {
                 q1.add(cur.left);
             }
-            if(cur.right!=null){
+            if (cur.right != null) {
                 q1.add(cur.right);
             }
-            if(cur.left==null&&cur.right!=null){
+            if (cur.left == null && cur.right != null) {
                 return false;
             }
             q1.poll();
         }
         return true;
     }
-    boolean isCompleteTree (Node root){
-        if(root==null){
+
+    boolean isCompleteTree(Node root) {
+        if (root == null) {
             return true;
         }
-        Queue<Node> q1 =new LinkedList<>();
+        Queue<Node> q1 = new LinkedList<>();
         q1.add(root);
-        while(!q1.isEmpty()){
+        while (!q1.isEmpty()) {
             Node cur = q1.peek();
-            if(cur==null){
+            if (cur == null) {
                 break;
-            }else{
+            } else {
                 q1.add(cur.left);
                 q1.add(cur.right);
             }
@@ -170,9 +238,9 @@ public class BinaryTree {
         while (!q1.isEmpty()) {
             //一个元素 一个元素 出队来判断 是不是空
             Node tmp = q1.peek();
-            if(tmp == null) {
+            if (tmp == null) {
                 q1.poll();
-            }else {
+            } else {
                 return false;
             }
         }
