@@ -9,8 +9,8 @@ import java.util.Arrays;
  */
 public class test {
     public static void main(String[] args) {
-        int []arr ={3,4,63,2,53,39,23,56};
-        sort.shellSort(arr);
+        int []arr ={3,4,63,2,53,39,23,56,2};
+        sort.heapSort(arr);
         System.out.println(Arrays.toString(arr));
 
     }

@@ -9,7 +9,7 @@ import java.util.Arrays;
  */
 public class Priortyqueue {
     public int[] heap;
-    public int usedsize;
+    public int usedsize;//len-1
     public static final int DEFAULT_SIZE = 10;
 
     public Priortyqueue(int[] arr) {
