@@ -100,7 +100,7 @@ public class test {
     }
     public static void main1(String[] args) {
         int []arr ={3,4,63,2,53,39,23,56,2};
-        sort.quickSortNor(arr);
+        sort.insertSort(arr);
         System.out.println(Arrays.toString(arr));
     }
     public static void main(String[] args) {
@@ -117,6 +117,5 @@ public class test {
         testMergeNor(array);
         testQuickNor(array);
     }
-
 
 }

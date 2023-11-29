@@ -14,14 +14,16 @@ public class sort {
         for (int i = 1; i < array.length; i++) {
             int cur = array[i];
             int j = i - 1;
+            int  tempindex = j;
             for (; j >= 0; j--) {
-                if (array[j] > cur) {
-                    array[j + 1] = array[j];
+                tempindex=j;
+                if (array[tempindex] > cur) {
+                    array[tempindex+1] = array[tempindex];
                 } else {
                     break;
                 }
             }
-            array[j + 1] = cur;
+            array[tempindex + 1] = cur;
         }
     }
 
