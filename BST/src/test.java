@@ -15,4 +15,18 @@ public class test {
         bst.delete(5);
         System.out.println("hh");
     }
+
+    public static void main1(String[] args) {
+        TreeNode node1 =new TreeNode(5);
+        TreeNode node2 =new TreeNode(4);
+        TreeNode node3 =new TreeNode(3);
+        TreeNode node4 =new TreeNode(2);
+        TreeNode node5 =new TreeNode(1);
+       node3.left=node4;
+       node3.right=node2;
+       node4.left=node5;
+       node2.right= node1;
+
+        TreeNode node6 = new BSTPractice().Convert(node3);
+    }
 }
