@@ -28,7 +28,7 @@ public class test {
         System.out.println(bt.preorderTraversal(node1));
     }
 
-    public static void main(String[] args) {
+    public static void main2(String[] args) {
         BinaryTree bt = new BinaryTree();
         BinaryTree.Node node1 =new BinaryTree.Node(32);
         BinaryTree.Node node2 =new BinaryTree.Node(31);
@@ -41,4 +41,6 @@ public class test {
         node3.right=node5;
         System.out.println(bt.levelOrder(node1));
     }
+
+
 }
