@@ -1,9 +1,6 @@
-package thread;
+package Threaddemo1;
 
 import java.util.Random;
-import java.util.Timer;
-
-import static javax.management.Query.in;
 
 /**
  * Created with IntelliJ IDEA.
@@ -43,7 +40,8 @@ public class Main {
             }
         });
         //lambda
-        Thread thread3 = new Thread(() -> {
+        Thread thread3 = new Thread(() ->
+        {
             try {
                 Thread.sleep(3000);
                 System.out.println("thread3");
@@ -75,7 +73,7 @@ public class Main {
 //记录程序的执行时间.
     public static int result = 0;
 
-    public static void main2(String[] args) throws InterruptedException {
+    public static void main(String[] args) throws InterruptedException {
         int[] arr = new int[1000_0000];
         Random random = new Random();
         for (int i = 0; i < arr.length; i++) {
@@ -84,16 +82,12 @@ public class Main {
         Long before = System.currentTimeMillis();
         Thread thread1 = new Thread(() -> {
             for (int i = 0; i < arr.length; i += 2) {
-                synchronized (Main.class) {
-                    result += arr[i];
-                }
+                result += arr[i];
             }
         });
         Thread thread2 = new Thread(() -> {
             for (int i = 1; i < arr.length; i += 2) {
-                synchronized (Main.class) {
-                    result += arr[i];
-                }
+                result += arr[i];
             }
         });
         thread1.start();
@@ -101,15 +95,17 @@ public class Main {
         thread1.join();
         thread2.join();
         Long cur = System.currentTimeMillis();
-        System.out.println("MultiThread:"+result);
-        System.out.println("MultiThread:"+ (cur-before));
+        System.out.println("MultiThread:" + result);
+        System.out.println("MultiThread:" + (cur - before));
     }
 
-    public static void main(String[] args) {
+    public static void main3(String[] args) {
         Thread t = new Thread(new Runnable() {
             @Override
             public void run() {
-                System.out.println("1");
+                while (true) {
+                    System.out.println("1");
+                }
             }
         });
         t.start();
