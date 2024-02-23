@@ -10,7 +10,7 @@ package Threaddemo2;
 public class ThreadDemo2 {
     public static int count = 0;
 
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] a) throws InterruptedException {
         Object locker = new Object();
         Thread thread1 = new Thread() {
             @Override
