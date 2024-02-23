@@ -72,6 +72,7 @@ public class ThreadDome6 {
     //那我们如何来控制线程间的相对顺序：join，wait,给一个先后执行的“编码”
     public static void main(String[] args) {
         Object locker = new Object();
+        Object locker2 = new Object();
         Thread thread1 = new Thread(() -> {
             for (int i = 0; i < 10; i++) {
                 synchronized (locker) {
