@@ -1,6 +1,6 @@
 /**
  * Created with IntelliJ IDEA.
- * Description:首先这是一个正常的循环队列（直接使用库函数的无法把控阻塞的细节），然后有阻塞功能
+ * Description:首先这是一个正常的循环队列（直接使用库函数的队列无法把控阻塞的细节），然后有阻塞功能
  * User: Benjamin
  * Date: 2024-02-23
  * Time: 16:01
@@ -9,11 +9,11 @@ public class MyBlockingQueue<T> {
     private int begin = 0;
     private int end = 0;
     private volatile int usedSize = 0;//在多线程用于沟通，volatile
-    private Object[] queue = null;//默认size为100
+    private Object[] queue = null;
     private final int DEFAULT_SIZE = 100;
 
     public MyBlockingQueue() {
-        queue = new Object[DEFAULT_SIZE];
+        queue = new Object[DEFAULT_SIZE];//默认size为100
     }
 
     public void put(T value) throws InterruptedException {

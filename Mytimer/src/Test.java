@@ -20,5 +20,11 @@ public class Test {
                 System.out.println("gg");
             }
         },1000);
+        timer.schedule(new Runnable() {
+            @Override
+            public void run() {
+                System.out.println("hg");
+            }
+        },5000);
     }
 }
