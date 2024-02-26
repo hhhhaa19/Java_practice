@@ -36,6 +36,9 @@ public class MyThreadPool {
             thread.start();
         }
         //这段怪怪的，感觉线程的创建也会被阻塞
+        //无论是使用 Thread 类的构造方法还是通过 Runnable 接口实现线程任务，线程的创建都不会等待任务执行完成。这是 Java 线程模型的基本特性。
+        //具体地说，当你调用 new Thread(...) 构造方法时，会创建一个新的线程对象，并且通过调用 start() 方法来启动该线程执行 run() 方法。
+        // 而在 Runnable 接口中，也是通过实现 run() 方法来定义线程的执行逻辑，同样地，线程的创建不会等待 run() 方法执行完毕
     }
 
     public void submit(Runnable task) throws InterruptedException {
