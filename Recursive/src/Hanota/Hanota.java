@@ -1,3 +1,5 @@
+package Hanota;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,24 +18,26 @@ class test {
         A.add(2);
         A.add(1);
         A.add(0);
-        new Hanota().hanota(A,B,C);
+        new Hanota().hanota(A, B, C);
     }
 }
+
+
 public class Hanota {
-    public void move (List<Integer> source, List<Integer> Mid, List<Integer> dest,int n){
-        if(n==0){
+    public static void move(List<Integer> source, List<Integer> mid, List<Integer> dest,int n) {
+        if(n== 0){
             return ;
         }
-    if (n==1){
+        if(n==1){
+            dest.add(source.remove(source.size()-1));
+            return;
+        }
+        move(source,dest,mid,n-1);
         dest.add(source.remove(source.size()-1));
-        return;
-    }
-    move(source,dest,Mid,n-1);
-    dest.add(source.remove(source.size()-1));
-    move(Mid,source,dest,n-1);
-}
-    public void hanota(List<Integer> A, List<Integer> B, List<Integer> C) {
-        move(A,B,C,A.size());
+        move(mid,source,dest,n-1);
     }
 
+    public  void hanota (List<Integer> A ,List<Integer> B,List<Integer> C) {
+        move(A,B,C,A.size());
+    }
 }
