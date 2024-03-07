@@ -13,37 +13,36 @@ import java.util.Scanner;
  * Time: 20:46
  */
 public class UdpEchoClient {
-    public DatagramSocket clientDatagramSocket = null;
-    private String serveIp;
-    private int servePort;
+    DatagramSocket socketClient = null;
+    private String requestIP = null;
+    private int requestPort;
 
-    public UdpEchoClient(String serveIp, int servePort) throws SocketException {
-        //给一个随机端口就行
-        clientDatagramSocket = new DatagramSocket();
-        //把服务器的IP与port存起来
-        this.serveIp = serveIp;
-        this.servePort = servePort;
+    public UdpEchoClient(String requestIP,int requestPort) throws SocketException {
+        //这里要传入目标服务器，暂存，后续使用
+        socketClient = new DatagramSocket();
+        this.requestIP = requestIP;
+        this.requestPort = requestPort;
     }
 
     public void start() throws IOException {
-        System.out.println("客户端启动");
+        System.out.println("客户端启动！");
         Scanner scanner = new Scanner(System.in);
-        while (true) {
-            //构造请求
-            System.out.print("请输入内容"+"->");
-            if (!scanner.hasNext()) {
-                break;//??
+        while(true){
+            System.out.print("请输入内容->");
+            if(!scanner.hasNext()){
+                break;
             }
+            //从客户端终端得到命令
             String str = scanner.next();
-            DatagramPacket request = new DatagramPacket(str.getBytes(), 0, str.getBytes().length);
-            request.setAddress(InetAddress.getByName(serveIp));
-            request.setPort(servePort);
-            //发送请求，还是一样，关键信息都在报中,注意这里只有destination,要发出去后才有source的信息
-            clientDatagramSocket.send(request);
-            //构造收取response
-            DatagramPacket response = new DatagramPacket(new byte[1024],1024);
-            clientDatagramSocket.receive(response);
-            //打印response,这里收到的client的response应该与serve的request相同
+            //构造request
+            DatagramPacket request = new DatagramPacket(str.getBytes(),0,str.getBytes().length);
+            request.setAddress(InetAddress.getByName(requestIP));
+            request.setPort(requestPort);
+            //发送
+            socketClient.send(request);
+            //接受
+            DatagramPacket response = new DatagramPacket(new byte[4096],4096);
+            socketClient.receive(response);
             System.out.println(new String(response.getData(),0,response.getLength()));
         }
     }
@@ -52,4 +51,5 @@ public class UdpEchoClient {
         UdpEchoClient udpEchoClient = new UdpEchoClient("127.0.0.1",9090);
         udpEchoClient.start();
     }
+
 }
