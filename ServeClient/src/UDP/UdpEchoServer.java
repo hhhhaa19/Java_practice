@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.SocketException;
+import java.nio.charset.StandardCharsets;
 
 /**
  * Created with IntelliJ IDEA.
@@ -28,9 +29,10 @@ public class UdpEchoServer {
             socketServe.receive(request);
             //根据输入包，处理
             String strRequest = new String(request.getData(), 0, request.getLength());
-            String strResponse = this.process(strRequest);
+            String strResponse = process(strRequest);
             //构造response数据包
-            DatagramPacket response = new DatagramPacket(strResponse.getBytes(),0,strResponse.length());
+            DatagramPacket response = new DatagramPacket(strResponse.getBytes(),0,strResponse.getBytes().length);
+
             response.setAddress(request.getAddress());
             response.setPort(request.getPort());
             socketServe.send(response);
@@ -39,7 +41,7 @@ public class UdpEchoServer {
         }
     }
 
-    private String process(String request) {
+    public String process(String request) {
         //回响服务器
         return  request;
     }
