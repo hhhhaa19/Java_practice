@@ -75,41 +75,43 @@ public class Lab3 {
     public static void MergeSort(int[] arr) {
         //递归,核心我们只有一个数组，实际操作时把下标分割
 
-        helpMergeSort(arr, 0, arr.length - 1);
+        helpMergeSort(arr, 0, arr.length-1);
     }
 
     private static void helpMergeSort(int[] arr, int begin, int end) {
+        
         if (begin == end) {
             return;
         }
-        int mid = (begin + end) / 2;
+        int mid = begin + (end - begin) / 2;
         helpMergeSort(arr, begin, mid);
         helpMergeSort(arr, mid + 1, end);
         merge(arr, begin, mid, end);
     }
 
     private static void merge(int[] arr, int begin, int mid, int end) {
-        int index = 0;
-        int s1 = begin;
-        int s2 = mid + 1;
+        int b1 = begin;
         int e1 = mid;
+        int b2 = mid + 1;
         int e2 = end;
         int[] temp = new int[end - begin + 1];
-        while (s1 <= e1 && s2 <= e2) {
-            if (arr[s1] < arr[s2]) {
-                temp[index++] = arr[s1++];
+        int index = 0;
+        while (b1 <= e1 && b2 < e2) {
+            if (arr[b1] < arr[b2]) {
+                temp[index++] = arr[b1++];
             } else {
-                temp[index++] = arr[s2++];
+                temp[index++] = arr[b2++];
             }
         }
-        while (s1 <= e1) {
-            temp[index++] = arr[s1++];
+        while (b1 <= e1) {
+            temp[index++] = arr[b1++];
         }
-        while (s2 <= e2) {
-            temp[index++] = arr[s2++];
+        while (b2 <= e2) {
+            temp[index++] = arr[b2++];
         }
-        for (int i = 0; i < temp.length; i++) {
-            arr[begin + i] = temp[i];
+        for (int cur :
+                temp) {
+            arr[begin++] = cur;
         }
     }
 
@@ -148,26 +150,26 @@ public class Lab3 {
         }
     }
 
-    public static void leap(int[] arr, int step)throws IOException {
+    public static void leap(int[] arr, int step) throws IOException {
         //找连续非0的个数，第一位不算
         //check!!!!!
         int i = 1;
         int Maxcount = 0;
-        while(i<arr.length){
-            int count =0;
+        while (i < arr.length) {
+            int count = 0;
             int j = i;
-            while(j<arr.length&&arr[j]!=0){
+            while (j < arr.length && arr[j] != 0) {
                 count++;
                 j++;
             }
-            if(count>Maxcount){
-                Maxcount= count;
+            if (count > Maxcount) {
+                Maxcount = count;
             }
-            i = j+1;
+            i = j + 1;
         }
-        if(Maxcount-step>=0){
+        if (Maxcount - step >= 0) {
             System.out.println("false");
-        }else{
+        } else {
             System.out.println("true");
         }
     }
@@ -175,15 +177,15 @@ public class Lab3 {
     public static void main(String[] args) {
         //triangular();
         //transform();
-//        int[] arr = {2, 4, 1, 7};
-//        MergeSort(arr);
-//        System.out.println(Arrays.toString(arr));
+        int[] arr = {2, 4, 1, 7};
+        MergeSort(arr);
+       System.out.println(Arrays.toString(arr));
 //        int[] arr = {2, 3, 5, 5, 2};
 //        cutSticks(arr);
-        try {
-            leap(new int[]{0,1,0},1);//编译角度会不会检查，与实际逻辑无关
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+//        try {
+//            leap(new int[]{0, 1, 0}, 1);//编译角度会不会检查，与实际逻辑无关
+//        } catch (IOException e) {
+//            throw new RuntimeException(e);
+//        }
     }
 }

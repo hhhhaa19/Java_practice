@@ -40,7 +40,7 @@ public class TcpEchoClient {
                 //要刷新缓存
                 outputWriter.flush();
                 //接受response
-                String response = inputScanner.next();
+                String response = inputScanner.nextLine();
                 System.out.println(response);
             }
         } catch (IOException e) {

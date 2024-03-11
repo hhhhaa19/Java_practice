@@ -31,6 +31,7 @@ public class UdpEchoServer {
             String strRequest = new String(request.getData(), 0, request.getLength());
             String strResponse = process(strRequest);
             //构造response数据包
+            //注意这里的长度，尤其是中文的字节长度与String中的长度不一样
             DatagramPacket response = new DatagramPacket(strResponse.getBytes(),0,strResponse.getBytes().length);
 
             response.setAddress(request.getAddress());
