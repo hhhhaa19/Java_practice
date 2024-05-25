@@ -18,33 +18,33 @@ public class InputOutputDemo {
             outfile.createNewFile();
         }
         //字符流
-//        try(FileReader reader = new FileReader(file);
-//        FileWriter writer = new FileWriter(outfile)){
-//            int len = 0;
-//            char[] buffer = new char[4];
-//            StringBuffer stringBuffer = new StringBuffer();
-//            while(true){
-//                len = reader.read(buffer,0,4);
-//                if(len==-1){
-//                    break;
-//                }
-//                stringBuffer.append(new String(buffer,0,len));
-//            }
-//            String ret = new String(stringBuffer);
-//            //输出
-//            writer.write(ret);
-//            writer.flush();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
+        try(FileReader reader = new FileReader(file);
+        FileWriter writer = new FileWriter(outfile)){
+            int len = 0;
+            char[] buffer = new char[4];
+            StringBuffer stringBuffer = new StringBuffer();
+            while(true){
+                len = reader.read(buffer,0,4);
+                if(len==-1){
+                    break;
+                }
+                stringBuffer.append(new String(buffer,0,len));
+            }
+            String ret = new String(stringBuffer);
+            //输出
+            writer.write(ret);
+            writer.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         //字节流
         try(FileInputStream inputStream = new FileInputStream(file);
         FileOutputStream outputStream = new FileOutputStream(outfile)){
             int len  = 0;
             StringBuffer stringBuffer = new StringBuffer();
             while(true){
-                byte[] buffer = new byte[12];
-                len = inputStream.read(buffer,0,12);
+                byte[] buffer = new byte[1024];
+                len = inputStream.read(buffer,0,1024);
                 if(len == -1){
                     break;
                 }

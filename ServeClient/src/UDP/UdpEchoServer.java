@@ -28,12 +28,18 @@ public class UdpEchoServer {
             DatagramPacket request = new DatagramPacket(new byte[4096], 4096);
             socketServe.receive(request);
             //根据输入包，处理
-            String strRequest = new String(request.getData(), 0, request.getLength());
+            String strRequest = new String(request.getData(), 0, request.getLength());//有效长度
             String strResponse = process(strRequest);
             //构造response数据包
             //注意这里的长度，尤其是中文的字节长度与String中的长度不一样
             DatagramPacket response = new DatagramPacket(strResponse.getBytes(),0,strResponse.getBytes().length);
+            //state test
+            for (byte cur :
+                    response.getData()) {
+                System.out.printf("%x",cur);
+            }
 
+            //end
             response.setAddress(request.getAddress());
             response.setPort(request.getPort());
             socketServe.send(response);

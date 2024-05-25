@@ -44,6 +44,10 @@ public class UdpEchoClient {
             //接受
             DatagramPacket response = new DatagramPacket(new byte[4096],4096);
             socketClient.receive(response);
+            for (byte cur :
+                    response.getData()) {
+                System.out.printf("%x",cur);
+            }
             System.out.println(new String(response.getData(),0,response.getLength()));
         }
     }
