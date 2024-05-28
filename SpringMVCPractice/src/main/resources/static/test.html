@@ -1,12 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <script src = "https://code.jquery.com/jquery-3.7.1.min.js"></script>
 </head>
+
 <body>
-<form action ="/hello/MVC"  method="post">
-    <input type="submit" value="update">
-</form>
+    <button>click here</button>
+    <form>
+        <input type="email">
+        <button> submit </button>
+    </form>
+    <p> <a href = "https://www.badui.com">click here</a></p> 
+    <script>
+        alert("haha");
+        var b = undefined;
+        var arr = new Array();
+        arr.push(2);
+        arr.push(3);
+        function add(x, y) {
+            console.log(1 + 2);
+        }
+        console.log(add(10 + 20));
+        var student = {
+            "name": 'ben',
+            age: 175,
+            sayhello: function () {
+                console.log("hello");
+            }
+        }
+        student.sayhello();
+        console.log(student.name);
+        var person = new Object();
+        person.name = "bill";
+        person.id = 10;
+        person.func = function () {
+            console.log("hehe");
+        };
+        console.log(person.id);
+        person.func();
+        $(document).ready(function(){
+            $('button').click(function(){
+                $(this).hide();
+            });
+        });
+        $(function(){
+            console.log($('p').text());
+            console.log($('p').val());
+            console.log($('p').html());
+        });
+
+    </script>
 </body>
+
 </html>
