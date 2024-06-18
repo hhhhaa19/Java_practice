@@ -1,28 +1,23 @@
-package org.example.booksmanagementsystem;
+package org.example.booksmanagementsystem.dao;
 
+import org.example.booksmanagementsystem.model.Book;
+import org.springframework.stereotype.Component;
 
-import java.math.BigDecimal;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
+import java.math.BigDecimal;
 
 /**
  * Created with IntelliJ IDEA.
  * Description:
  * User: Benjamin
  * Date: 2024-06-12
- * Time: 10:31
+ * Time: 13:05
  */
-public class BookService {
-    private List<Book> books;
-
-    public BookService() {
-        this.books = new ArrayList<Book>();
-    }
-    public List<Book> getBooks() {
-        return books;
-    }
-
-    public void mock() {
+@Component
+public class BookDao {
+    public List<Book> mock() {
+        List<Book> books = new ArrayList<Book>();
         int size = 10;
         for (int i = 0; i < size; i++) {
             Book book = new Book();
@@ -35,6 +30,6 @@ public class BookService {
             book.setStatus(i%2);
             books.add(book);
         }
+        return books;
     }
-
 }

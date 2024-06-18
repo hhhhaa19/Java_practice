@@ -1,6 +1,7 @@
-package org.example.booksmanagementsystem;
+package org.example.booksmanagementsystem.model;
 
 import lombok.Data;
+import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
 
@@ -12,6 +13,7 @@ import java.math.BigDecimal;
  * Time: 10:28
  */
 @Data
+@Component
 public class Book {
     private Integer id;
     private String bookName;
@@ -20,4 +22,5 @@ public class Book {
     private BigDecimal price;
     private String publish;
     private Integer status;
+    private String statusCH;
 }
