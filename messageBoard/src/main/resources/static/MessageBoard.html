@@ -70,7 +70,7 @@
             type: "get",
             success: function (messages) {
                 for (var message of messages) {
-                    var divOverall = "<div>" + message.source + "对" + message.destination + "说:" + message.message + "</div>";
+                    var divOverall = "<div>" + message.from + "对" + message.to + "说:" + message.message + "</div>";
                     $(".container").append(divOverall);
                 }
             }
@@ -86,8 +86,8 @@
             type: "post",
             url: "board/setMessage",
             data: {
-                source: from,
-                destination: to,
+                from: from,
+                to: to,
                 message: say
             },
             success: function (isSuccess) {

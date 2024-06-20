@@ -1,8 +1,71 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.ben.mybatisxml.mapper.MapperXml">
-<select id="selectCount">
-    select count(id) from userinfo
-</select>
+    <select id="selectCount">
+        select count(id)
+        from userinfo
+    </select>
+    <sql id="userNotNull">
+        <if test="username!=null">
+            #{username},
+        </if>
+    </sql>
+    <insert id="insertByCondition">
+        insert into userinfo
+        <trim prefix="(" suffixOverrides="," suffix=")">
+            <if test="username!=null">
+                username,
+            </if>
+            <if test="password!=null">
+                password,
+            </if>
+            <if test="age!=null">
+                age,
+            </if>
+            <if test="gender!=null">
+                gender,
+            </if>
+        </trim>
+        values
+        <trim prefix="(" suffixOverrides="," suffix=")">
+            <include refid="userNotNull"></include>
+            <if test="password!=null">
+                #{password},
+            </if>
+            <if test="age!=null">
+                #{age},
+            </if>
+            <if test="gender!=null">
+                #{gender},
+            </if>
+        </trim>
+
+    </insert>
+
+    <update id="updateByCondition">
+        update userinfo
+        <set>
+            <if test="username != null">
+                username = #{username},
+            </if>
+            <if test="password != null">
+                password = #{password}
+            </if>
+        </set>
+        <where>
+            <if test="id != null">
+                id = #{id}
+            </if>
+            <if test="age != null">
+                and age = #{age}
+            </if>
+        </where>
+    </update>
+    <select id="selectByIds">
+        select * from userinfo where id in
+        <foreach collection="userInfos" item="userinfo" open="(" close=")" separator=",">
+            #{userinfo.id}
+        </foreach>
+    </select>
 
 </mapper>

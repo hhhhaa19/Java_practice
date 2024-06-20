@@ -1,11 +1,12 @@
-package org.example.messageboard;
+package org.example.messageboard.controller;
 
-import ch.qos.logback.core.util.StringUtil;
+import org.example.messageboard.model.MessageInfo;
+import org.example.messageboard.service.MessageService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.awt.*;
 import java.util.ArrayList;
 
 
@@ -19,20 +20,15 @@ import java.util.ArrayList;
 @RestController
 @RequestMapping("/board")
 public class MessageBoardController {
-    private ArrayList<MessageInfo> messages = new ArrayList<MessageInfo>();
+    @Autowired
+    private MessageService messageService;
 
     @RequestMapping("/setMessage")
     public boolean setMessage(MessageInfo message) {
-        if (!StringUtils.hasLength(message.getMessage())
-                || !StringUtils.hasLength(message.getDestination()) ||
-                !StringUtils.hasLength(message.getSource())) {
-            return false;
-        }
-        messages.add(message);
-        return true;
+        return messageService.insertMessage(message);
     }
     @RequestMapping("/getMessage")
     public ArrayList<MessageInfo> getMessage() {
-        return messages;
+        return messageService.selectAllMessage();
     }
 }
