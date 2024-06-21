@@ -1,10 +1,15 @@
 package org.example.booksmanagementsystem.service;
 
 
-import org.example.booksmanagementsystem.dao.BookDao;
+
+import org.apache.ibatis.annotations.Delete;
+import org.example.booksmanagementsystem.component.PageInfo;
+import org.example.booksmanagementsystem.component.ReturnType;
+import org.example.booksmanagementsystem.mapper.BookMapper;
 import org.example.booksmanagementsystem.model.Book;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -16,19 +21,23 @@ import java.util.ArrayList;
  * Date: 2024-06-12
  * Time: 10:31
  */
-@Component
+@Service
 public class BookService {
     @Autowired
-    BookDao bookDao;
-    public List<Book> getAllBooks() {
-        List<Book> bookList = bookDao.mock();
-        for (Book book : bookList) {
-            if (book.getStatus() == 1) {
-                book.setStatusCH("可借阅");
-            } else {
-                book.setStatusCH("不可借阅");
-            }
+    private BookMapper bookMapper;
+
+
+    public String addBook(Book book) {
+        Integer i = bookMapper.InsertBook(book);
+        if(i>0){
+            return "success";
         }
-        return bookList;
+        return "fail";
+    }
+
+    public ReturnType<List<Book>,Integer> getAllBooksByPageInfo(PageInfo pageInfo) {
+        List<Book> books = bookMapper.getAllBooksByPageInfo(pageInfo);
+        Integer bookNumber = bookMapper.getBookNumber();
+        return new ReturnType<List<Book>,Integer>(books,bookNumber);
     }
 }

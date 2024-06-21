@@ -1,5 +1,8 @@
 package org.example.booksmanagementsystem.Controller;
 
+import lombok.extern.slf4j.Slf4j;
+import org.example.booksmanagementsystem.component.PageInfo;
+import org.example.booksmanagementsystem.component.ReturnType;
 import org.example.booksmanagementsystem.model.Book;
 import org.example.booksmanagementsystem.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,15 +19,20 @@ import java.util.List;
  * Time: 10:14
  */
 @RequestMapping("/book")
+@Slf4j
 @RestController
 public class BookListController {
     @Autowired
     BookService bookService;
-    @Autowired
-    BookService bookService1;
 
     @RequestMapping("/getBookList")
-    public List<Book> getBookList() {
-        return bookService.getAllBooks();
+    public ReturnType<List<Book>,Integer> getBookList(PageInfo pageInfo) {
+        log.info("getBookList:{}",pageInfo);
+        return bookService.getAllBooksByPageInfo(pageInfo);
+    }
+    @RequestMapping("/addBook")
+    public String addBook(Book book) {
+        log.info("addBook:{}",book);
+        return bookService.addBook(book);
     }
 }

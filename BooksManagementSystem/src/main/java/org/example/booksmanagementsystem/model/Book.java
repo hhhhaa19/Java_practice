@@ -4,6 +4,7 @@ import lombok.Data;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
+import java.util.Date;
 
 /**
  * Created with IntelliJ IDEA.
@@ -23,4 +24,6 @@ public class Book {
     private String publish;
     private Integer status;
     private String statusCH;
+    private Date createTime;
+    private Date updateTime;
 }
