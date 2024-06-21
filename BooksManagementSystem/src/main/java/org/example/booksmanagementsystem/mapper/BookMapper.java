@@ -19,8 +19,8 @@ import java.util.List;
 public interface BookMapper {
     @Insert("insert into book_info (book_name,author,count,price,publish,status) values (#{bookName},#{author},#{count},#{price},#{publish},#{status})")
     Integer InsertBook(Book book);
-    @Select("select count(1) from book_info ")
+    @Select("select count(1) from book_info ")//筛选可借阅的
     Integer getBookNumber();
-    @Select("select * from book_info limit #{offset},#{pageSize}")
+    @Select("select * from book_info limit #{offset},#{pageSize}") //排序
     List<Book> getAllBooksByPageInfo(PageInfo pageInfo);
 }

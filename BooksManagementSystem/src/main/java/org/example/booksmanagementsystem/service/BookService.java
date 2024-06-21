@@ -1,8 +1,8 @@
 package org.example.booksmanagementsystem.service;
 
 
-
 import org.apache.ibatis.annotations.Delete;
+import org.example.booksmanagementsystem.Enum.BookStatus;
 import org.example.booksmanagementsystem.component.PageInfo;
 import org.example.booksmanagementsystem.component.ReturnType;
 import org.example.booksmanagementsystem.mapper.BookMapper;
@@ -29,15 +29,20 @@ public class BookService {
 
     public String addBook(Book book) {
         Integer i = bookMapper.InsertBook(book);
-        if(i>0){
+        if (i > 0) {
             return "success";
         }
         return "fail";
     }
 
-    public ReturnType<List<Book>,Integer> getAllBooksByPageInfo(PageInfo pageInfo) {
+    public ReturnType<List<Book>, PageInfo> getAllBooksByPageInfo(PageInfo pageInfo) {
         List<Book> books = bookMapper.getAllBooksByPageInfo(pageInfo);
+        for (Book book : books) {
+            //可以用枚举类
+            book.setStatusCH(BookStatus.getDescByValue(book.getStatus()));
+        }
         Integer bookNumber = bookMapper.getBookNumber();
-        return new ReturnType<List<Book>,Integer>(books,bookNumber);
+        pageInfo.setTotalRecords(bookNumber);
+        return new ReturnType<List<Book>, PageInfo>(books, pageInfo);
     }
 }

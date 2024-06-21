@@ -115,11 +115,12 @@
 
         function getBookList() {
             $.ajax({
-                url: "/book/getBookList",
+                url: "/book/getBookList" + location.search,//每次新的界面就会有新的book_list.html?pageNumber = ?的请求,这个 URL 会包含我们要的约定的接口(向后端)的请求信息，发送新的请求
                 type: "post",
-                success: function (BookLists) {
+                success: function (returnValue) {
+                    var BookLists = returnValue.value;
+                    var html = '';
                     for (var book of BookLists) {
-                        var html = '';
                         html += '<tr>';
                         html += '<td><input type="checkbox" name="selectBook" value="1" id="selectBook" class="book-select"></td>';
                         html += '<td>' + book.id + '</td>';
@@ -128,34 +129,34 @@
                         html += '<td>' + book.count + '</td>';
                         html += '<td>' + book.price + '</td>';
                         html += '<td>' + book.publish + '</td>';
-                        if (book.status == 1) {
-                            html += '<td>' + '可借阅' + '</td>';
-                        } else {
-                            html += '<td>' + '不可借阅' + '</td>';
-                        }
+                        html += '<td>' + book.statusCH + '</td>';
                         html += '<td> <div class="op"> <a href="book_update.html?bookId=1">修改</a> <a href="javascript:void(0)" onclick="deleteBook(1)">删除</a> </div></td></tr>';
-                        $("tbody").append(html);
                     }
+                    $("tbody").html(html);
+                    //翻页信息
+
+                    $("#pageContainer").jqPaginator({
+                        totalCounts: returnValue.parameter.totalRecords, //总记录数
+                        pageSize: 10,    //每页的个数
+                        visiblePages: 5, //可视页数
+                        currentPage: returnValue.parameter.pageNumber,  //当前页码，可以从url中得到，也可以从后端
+                        first: '<li class="page-item"><a class="page-link">首页</a></li>',
+                        prev: '<li class="page-item"><a class="page-link" href="javascript:void(0);">上一页<\/a><\/li>',
+                        next: '<li class="page-item"><a class="page-link" href="javascript:void(0);">下一页<\/a><\/li>',
+                        last: '<li class="page-item"><a class="page-link" href="javascript:void(0);">最后一页<\/a><\/li>',
+                        page: '<li class="page-item"><a class="page-link" href="javascript:void(0);">{{page}}<\/a><\/li>',
+                        //页面初始化和页码点击时都会执行
+                        onPageChange: function (page, type) {
+                            console.log("第" + page + "页, 类型:" + type);
+                            if (type == "change") {
+                                location.href = "/book_list.html?pageNumber=" + page;//用这种方式来传递参数
+                            }
+                        }
+                    });
                 }
             });
         }
 
-        //翻页信息
-        $("#pageContainer").jqPaginator({
-            totalCounts: 100, //总记录数
-            pageSize: 10,    //每页的个数
-            visiblePages: 5, //可视页数
-            currentPage: 1,  //当前页码
-            first: '<li class="page-item"><a class="page-link">首页</a></li>',
-            prev: '<li class="page-item"><a class="page-link" href="javascript:void(0);">上一页<\/a><\/li>',
-            next: '<li class="page-item"><a class="page-link" href="javascript:void(0);">下一页<\/a><\/li>',
-            last: '<li class="page-item"><a class="page-link" href="javascript:void(0);">最后一页<\/a><\/li>',
-            page: '<li class="page-item"><a class="page-link" href="javascript:void(0);">{{page}}<\/a><\/li>',
-            //页面初始化和页码点击时都会执行
-            onPageChange: function (page, type) {
-                console.log("第" + page + "页, 类型:" + type);
-            }
-        });
 
         function deleteBook(id) {
             var isDelete = confirm("确认删除?");

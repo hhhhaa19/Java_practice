@@ -26,7 +26,7 @@ public class BookListController {
     BookService bookService;
 
     @RequestMapping("/getBookList")
-    public ReturnType<List<Book>,Integer> getBookList(PageInfo pageInfo) {
+    public ReturnType<List<Book>,PageInfo> getBookList(PageInfo pageInfo) {
         log.info("getBookList:{}",pageInfo);
         return bookService.getAllBooksByPageInfo(pageInfo);
     }
