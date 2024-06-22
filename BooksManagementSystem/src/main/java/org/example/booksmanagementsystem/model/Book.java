@@ -1,6 +1,7 @@
 package org.example.booksmanagementsystem.model;
 
 import lombok.Data;
+import org.example.booksmanagementsystem.Enum.BookStatus;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;

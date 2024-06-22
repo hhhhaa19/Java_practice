@@ -6,6 +6,7 @@ import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
 import org.example.booksmanagementsystem.component.ReCaptchaProperty;
 import org.example.booksmanagementsystem.component.ReturnType;
+import org.example.booksmanagementsystem.component.Session;
 import org.example.booksmanagementsystem.model.User;
 import org.example.booksmanagementsystem.service.ReCaptchaService;
 import org.example.booksmanagementsystem.service.UserService;
@@ -38,22 +39,29 @@ public class UserController {
     ReCaptchaService reCaptchaService;
     @Autowired
     ReCaptchaProperty reCaptchaProperty;
+    @Autowired
+    Session session;
 
     @RequestMapping("/login")
-    public String login(User user) {
-        log.info("接收到的用户参数{}",user);
-        return userService.login(user);
+    public String login(User user, HttpSession httpSession) {
+        log.info("接收到的用户参数{}", user);
+        String result = userService.login(user);
+        if (result.equals("登录成功")) {
+            httpSession.setAttribute(session.getUserInfo(), user);
+        }
+        return result;
     }
 
     @RequestMapping("/register")
-    public String register(@RequestBody ReturnType<User,String> returnType, HttpSession httpSession) {
+    public String register(@RequestBody ReturnType<User, String> returnType, HttpSession httpSession) {
         //这里是spring mvc直接转了，我们也可以用string接受自己处理
         log.info("register信息{}", returnType);
         String code = (String) httpSession.getAttribute(reCaptchaProperty.getSession().getCode());
         Long time = (Long) httpSession.getAttribute(reCaptchaProperty.getSession().getTime());
-        if (!reCaptchaService.verifyReCaptcha(code, returnType.getParameter(), time)){
+        if (!reCaptchaService.verifyReCaptcha(code, returnType.getParameter(), time)) {
             return "验证码错误或超时";
         }
+        httpSession.setAttribute(session.getUserInfo(), returnType.getValue());
         return userService.registerUser(returnType.getValue());
     }
 
@@ -71,7 +79,6 @@ public class UserController {
             throw new RuntimeException(e);
         }
     }
-
 
 
 }

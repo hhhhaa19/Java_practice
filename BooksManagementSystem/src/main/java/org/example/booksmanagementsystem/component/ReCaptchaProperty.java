@@ -1,6 +1,7 @@
 package org.example.booksmanagementsystem.component;
 
 import lombok.Data;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
@@ -19,11 +20,6 @@ public final class ReCaptchaProperty {
     private Integer height;
     private Integer codeCount;
     private Long validTime;
+    @Autowired
     private Session session;
-
-    @Data
-    public static class Session {
-        private String code;
-        private String time;
-    }
 }
