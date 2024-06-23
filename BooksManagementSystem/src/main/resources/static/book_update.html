@@ -65,6 +65,11 @@
         url: "book/selectBookId" + location.search,
         type: "get",
         success: function (result) {
+            if (result.loginStatus == "ERROR") {
+                alert(result.value);
+                return;
+            }
+            result = result.value;
             $("#bookId").val(result.id);
             $("#bookName").val(result.bookName);
             $("#bookAuthor").val(result.author);
@@ -72,6 +77,12 @@
             $("#bookPrice").val(result.price);
             $("#bookPublisher").val(result.publish);
             $("#bookStatus").val(result.status);
+        },
+        error: function (error){
+            console.log(error);
+            if (error != null && error.status == 401) {
+                location.href = "login.html";
+            }
         }
     });
 
@@ -81,12 +92,23 @@
             type: "post",
             data: $("#updateBook").serialize(),
             success: function (result) {
+                if (result.loginStatus == "ERROR") {
+                    alert(result.value);
+                    return;
+                }
+                result = result.value;
                 if (result == "success") {
                     alert("更新成功");
                     location.href = "book_list.html"
                     return;
                 }
                 alert("更新失败，请联系管理员")
+            },
+            error: function (error){
+                console.log(error);
+                if (error != null && error.status == 401) {
+                    location.href = "login.html";
+                }
             }
         });
 

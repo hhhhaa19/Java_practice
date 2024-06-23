@@ -103,11 +103,22 @@
                 "password": $("#password").val()
             },
             success: function (result) {
+                if (result.loginStatus =="ERROR"){
+                    alert(result.value);
+                    return;
+                }
+                result = result.value;
                 if (result == "登录成功") {
                     alert(result);
                     location.href = "/book_list.html";
                 } else {
                     alert(result)
+                }
+            },
+            error: function (error){
+                console.log(error);
+                if (error != null && error.status == 401) {
+                    location.href = "login.html";
                 }
             }
         });

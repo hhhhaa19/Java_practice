@@ -49,14 +49,9 @@ public class BookService {
     }
 
     public Book selectBookById(Integer bookId) {
-        try {
-            Book book = bookMapper.selectBookById(bookId);
-            book.setStatusCH(BookStatus.getDescByValue(book.getStatus()));
-            return book;
-        } catch (Exception e) {
-            log.error(e.getMessage());
-        }
-        return null;
+        Book book = bookMapper.selectBookById(bookId);
+        book.setStatusCH(BookStatus.getDescByValue(book.getStatus()));
+        return book;
     }
 
     public String updateBook(Book book) {

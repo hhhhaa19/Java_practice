@@ -36,18 +36,10 @@ public class BookListController {
     @RequestMapping("/getBookList")
     public ReturnType<List<Book>, PageInfo> getBookList(PageInfo pageInfo, HttpSession httpSession) {
         log.info("getBookList:{}", pageInfo);
-        User user = (User) httpSession.getAttribute(session.getUserInfo());
-        log.info("getBookList访问用户:{}", user);
-        ReturnType returnType = bookService.getAllBooksByPageInfo(pageInfo);
-        if (user == null) {
-            returnType.setLoginStatus(LoginStatus.NOT_LOG);
-        } else {
-            returnType.setLoginStatus(LoginStatus.SUCCESS);
-        }
-        return returnType;
+        return bookService.getAllBooksByPageInfo(pageInfo);
     }
 
-    @RequestMapping("/addBook")
+    @RequestMapping(value = "/addBook",produces = "application/json")
     public String addBook(Book book) {
         log.info("addBook:{}", book);
         return bookService.addBook(book);
@@ -60,20 +52,20 @@ public class BookListController {
         return book;
     }
 
-    @RequestMapping("/updateBook")
+    @RequestMapping(value = "/updateBook",produces = "application/json")
     public String updateBook(Book book) {
         log.info("updateBook:{}", book);
         return bookService.updateBook(book);
     }
 
-    @RequestMapping("/deleteBook")
+    @RequestMapping(value = "/deleteBook",produces = "application/json")
     public String deleteBook(Book book) {
         log.info("deleteBook:{}", book);
         book.setStatus(0);
         return bookService.updateBook(book);
     }
 
-    @RequestMapping("/batchDeleteBook")
+    @RequestMapping(value = "/batchDeleteBook",produces = "application/json")
     public String batchDeleteBook(@RequestParam List<Integer> bookIds) {
         log.info("batchDeleteBook:{}", bookIds);
         return bookService.deleteBookByIds(bookIds);

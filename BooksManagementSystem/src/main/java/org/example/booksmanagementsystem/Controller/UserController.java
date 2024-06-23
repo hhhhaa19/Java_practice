@@ -42,7 +42,7 @@ public class UserController {
     @Autowired
     Session session;
 
-    @RequestMapping("/login")
+    @RequestMapping(value = "/login",produces = "application/json")
     public String login(User user, HttpSession httpSession) {
         log.info("接收到的用户参数{}", user);
         String result = userService.login(user);
@@ -52,7 +52,7 @@ public class UserController {
         return result;
     }
 
-    @RequestMapping("/register")
+    @RequestMapping(value = "/register",produces = "application/json")
     public String register(@RequestBody ReturnType<User, String> returnType, HttpSession httpSession) {
         //这里是spring mvc直接转了，我们也可以用string接受自己处理
         log.info("register信息{}", returnType);

@@ -55,10 +55,8 @@
                 url: "/book/getBookList" + location.search,//每次新的界面就会有新的book_list.html?pageNumber = ?的请求,这个 URL 会包含我们要的约定的接口(向后端)的请求信息，发送新的请求
                 type: "post",
                 success: function (returnValue) {
-                    var logStatus = returnValue.loginStatus;
-                    console.log(logStatus)
-                    if (logStatus == "NOT_LOG"){
-                        location.href = "login.html";
+                    if (returnValue.loginStatus =="ERROR"){
+                        alert(returnValue.value);
                         return;
                     }
                     var BookLists = returnValue.value;
@@ -98,6 +96,12 @@
                             }
                         }
                     });
+                },
+                error: function (error){
+                    console.log(error);
+                    if (error != null && error.status == 401) {
+                        location.href = "login.html";
+                    }
                 }
             });
         }
@@ -114,12 +118,23 @@
                         "id": id
                     },
                     success: function (result) {
+                        if (result.loginStatus =="ERROR"){
+                            alert(result.value);
+                            return;
+                        }
+                        result = result.value;
                         if (result == "success") {
                             alert("更新成功");
                             location.href = "book_list.html"+location.search
                             return;
                         }
                         alert("更新失败，请联系管理员");
+                    },
+                    error: function (error){
+                        console.log(error);
+                        if (error != null && error.status == 401) {
+                            location.href = "login.html";
+                        }
                     }
                 });
             }
@@ -141,12 +156,23 @@
                         bookIds: ids
                     },
                     success: function (result) {
+                        if (result.loginStatus =="ERROR"){
+                            alert(result.value);
+                            return;
+                        }
+                        result = result.value;
                         if (result == "success") {
                             alert("更新成功");
                             location.href = "book_list.html"+location.search
                             return;
                         }
                         alert("更新失败，请联系管理员");
+                    },
+                    error: function (error){
+                        console.log(error);
+                        if (error != null && error.status == 401) {
+                            location.href = "login.html";
+                        }
                     }
                 });
             }
