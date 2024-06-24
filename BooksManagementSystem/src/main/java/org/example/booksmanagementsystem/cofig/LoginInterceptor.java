@@ -30,7 +30,7 @@ public class LoginInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         HttpSession httpSession = request.getSession();
         User user = (User) httpSession.getAttribute(session.getUserInfo());
-        log.info("访问用户:{}", user);
+        //log.info("访问用户:{}", user);
         if (user == null) {
             //response.sendRedirect("/login");//试一下，返回的是200还是400
             response.setStatus(401);//这里我们认为是一种失败
