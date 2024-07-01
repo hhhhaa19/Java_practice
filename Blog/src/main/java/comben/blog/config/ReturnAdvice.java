@@ -1,30 +1,29 @@
-package org.example.booksmanagementsystem.cofig;
+package comben.blog.config;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import lombok.SneakyThrows;
+import comben.blog.model.Result;
 import lombok.extern.slf4j.Slf4j;
-import org.example.booksmanagementsystem.component.ReturnType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.MediaType;
 import org.springframework.http.server.ServerHttpRequest;
 import org.springframework.http.server.ServerHttpResponse;
 import org.springframework.web.bind.annotation.ControllerAdvice;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
 
 /**
  * Created with IntelliJ IDEA.
  * Description:
  * User: Benjamin
- * Date: 2024-06-23
- * Time: 19:59
+ * Date: 2024-06-27
+ * Time: 23:05
  */
 @Slf4j
-@ControllerAdvice
-public class ResponseAdvice implements ResponseBodyAdvice {
-
-
+@RestControllerAdvice
+public class ReturnAdvice implements ResponseBodyAdvice {
     @Autowired
     ObjectMapper objectMapper;
 
@@ -33,15 +32,19 @@ public class ResponseAdvice implements ResponseBodyAdvice {
         return true;
     }
 
-    @SneakyThrows
     @Override
     public Object beforeBodyWrite(Object body, MethodParameter returnType, MediaType selectedContentType, Class selectedConverterType, ServerHttpRequest request, ServerHttpResponse response) {
-        if (body instanceof ReturnType) {
+        if (body instanceof String || body == null) {
+            try {
+                return objectMapper.writeValueAsString(Result.success(body));
+            } catch (JsonProcessingException e) {
+                log.error("JsonProcessingException", e);
+                throw new RuntimeException(e);
+            }
+        }
+        if (body instanceof Result) {
             return body;
         }
-        if (body == null || body instanceof String) {
-            return objectMapper.writeValueAsString(ReturnType.success(body));
-        }
-        return ReturnType.success(body);
+        return Result.success(body);
     }
 }

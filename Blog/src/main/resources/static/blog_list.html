@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>博客列表页</title>
+
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/list.css">
+
+</head>
+<body>
+<div class="nav">
+    <img src="pic/logo2.jpg" alt="">
+    <span class="blog-title">我的博客系统</span>
+    <div class="space"></div>
+    <a class="nav-span" href="blog_list.html">主页</a>
+    <a class="nav-span" href="blog_edit.html">写博客</a>
+    <a class="nav-span" href="#" onclick="logout()">注销</a>
+</div>
+
+<div class="container">
+    <div class="left">
+        <div class="card">
+            <img src="pic/doge.jpg" alt="">
+            <h3>比特汤老师</h3>
+            <a href="#">GitHub 地址</a>
+            <div class="row">
+                <span>文章</span>
+                <span>分类</span>
+            </div>
+            <div class="row">
+                <span>2</span>
+                <span>1</span>
+            </div>
+        </div>
+    </div>
+    <div class="right">
+    </div>
+</div>
+<script src="js/jquery.min.js"></script>
+<script src="js/common.js"></script>
+<script>
+    $.ajax({
+        url: "/blog/getList",
+        type: "post",
+        success: function (result) {
+            var finalHtml = '';
+            if (result != null && result.status == "SUCCESS") {
+                for (var data of result.data) {
+                    finalHtml += '<div class="blog">';
+                    finalHtml += '<div class="title">' + data.title + '</div>';
+                    finalHtml += ' <div class="date">' + data.createTime + '</div>';
+                    finalHtml += '<div class="desc">' + data.content + '</div>';
+                    finalHtml += '<a class="detail" href="blog_detail.html?blogId=' + data.id + '">查看全文&gt;&gt;</a>';
+                    finalHtml += '</div>';
+                }
+                $(".container .right").html(finalHtml);
+            }
+            if (result.status == 'FAIL') {
+                alert(result.errorMessage);
+            }
+        }
+
+    });
+
+</script>
+</body>
+</html>

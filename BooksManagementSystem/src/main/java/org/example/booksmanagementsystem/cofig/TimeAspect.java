@@ -19,14 +19,9 @@ import org.springframework.stereotype.Component;
 public class TimeAspect {
 
     @Around("execution(* org.example.booksmanagementsystem.Controller.*.* (..))")
-    public Object recordTime(ProceedingJoinPoint processingJoinPoint) {
+    public Object recordTime(ProceedingJoinPoint processingJoinPoint) throws Throwable {
         Long startTime = System.currentTimeMillis();
-        Object result = null;
-        try {
-            result = processingJoinPoint.proceed();
-        } catch (Throwable e) {
-            log.error("记录handler时间切面异常+", e);
-        }
+        Object result = processingJoinPoint.proceed();
         log.info(processingJoinPoint.getSignature() + "耗时 {} ms", System.currentTimeMillis() - startTime);
         return result;
     }

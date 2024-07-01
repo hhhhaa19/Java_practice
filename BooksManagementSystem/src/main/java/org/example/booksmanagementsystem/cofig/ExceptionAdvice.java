@@ -18,7 +18,6 @@ import org.springframework.web.servlet.NoHandlerFoundException;
  * Time: 21:57
  */
 @ControllerAdvice
-@ResponseBody
 @Slf4j
 public class ExceptionAdvice {
     @ExceptionHandler
